@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //Object.freeze函数  
+    //阻止修改现有属性的特性和值，并阻止添加新属性  
+    var mine = {name:"wlc"}
+    Object.freeze(mine);
+    mine.name = "Tom";
+    console.log(mine) //{name:"wlc"}
+    //此时不允许添加或修改a的任何属性  
+</script>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //Object.assign函数，第一个参数为目标对象，后面依次为源对象  
+    //将来自一个或多个源对象中的值复制到一个目标对象 
+    var mine = {name:"wlc"}
+    var age = {age:18}
+    var hobby = {hobby:"Ani"}
+    var both = Object.assign(mine,age,hobby)
+    //{name: "wlc", age: 18, hobby: "Ani"}，注意这里mine因为是第一个参数会被当成目标对象，所以mine自身属性也被更改为和person一样了，即both === mine  
+    console.log(both)  //{name: "wlc", age: 18, hobby: "Ani"}
+    console.log(mine)  //{name: "wlc", age: 18, hobby: "Ani"}
+
+    var clone = object.assign({},both)
+    console.log(both) //{name: "wlc", age: 18, hobby: "Ani"}
+</script>
+</html>
