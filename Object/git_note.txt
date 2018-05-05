@@ -132,3 +132,23 @@ git clone https://git.oschina.net/name/test.git   //你的仓库地址
 
 
 下载成功，然后就可以用vscode打开项目修改了，修改后提交的步骤还是和上面一样：暂存-提交暂存-push提交到云端就ok了。
+
+
+Git鼓励大量使用分支：
+
+查看分支：git branch
+
+创建分支：git branch <name>
+
+切换分支：git checkout <name>
+
+创建+切换分支：git checkout -b <name>
+
+合并某分支到当前分支：git merge <name>
+
+删除分支：git branch -d <name>
+
+当出现分支冲突时：
+当Git无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
+
+用git log --graph命令可以看到分支合并图。
