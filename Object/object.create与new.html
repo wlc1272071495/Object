@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function Base(name,age){
+        this.name = name;
+        this.age= age;
+        console.log(this)
+    }
+    var b1 = new Base("b1","1");
+    console.dir(b1)
+    var b2 = Object.create(Base)
+    console.dir(b2)
+
+    var b3 = new Object();
+    b3.__proto__ = Object.prototype;
+    Base.call(b3,"b3","3")
+    console.dir(b3)
+</script>
+</html>
