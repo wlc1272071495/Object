@@ -1,4 +1,4 @@
-在vscode中使用Git
+在vscode中使用Git(参考地址：https://www.cnblogs.com/ashidamana/p/6122619.html)
 用了git最方便的就是比如在公司写了很多代码后回到家打开vscode只需要点击一下pull就能全部同步过来。是不是很方便。。。。毕竟之前我都是拿u盘拷贝回家或者存到云盘再下载下来。。
 
 我这里用的是国内的码云托管的代码，，github都是英文看不懂。。
