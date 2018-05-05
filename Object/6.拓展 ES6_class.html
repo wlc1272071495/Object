@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    class Person {
+        constructor(name,age){
+            this.name = name;
+            this.age= age;
+            this.say = function(){   //此方法在Person的实例化对象上
+                alert(1)
+            }
+        }
+        sayHello(){   //此方法在 Person.prototype上
+            console.log(hello)
+        }
+    }
+
+    var person= new Person("wlc",18)
+
+    // 1.判断某一对象是否含有某个属性 Object.hasownProperty()
+    person.hasOwnProperty("name")   //true
+    person.hasOwnProperty("age")    //true
+    person.hasOwnProperty("say")    //true
+
+    person.hasOwnProperty("sayHello")  //false    
+    //sayHello方法在 Person.prototype 即 person.__proto__上,person上找不到
+
+    person.__proto__.hasOwnProperty("sayHello")  //true
+
+    // 2.获取对象原型的方法  Object.getPropertyof
+    Object.getPrototypeOf(person)  //Person.prototype
+
+    // 3.Object.getOwnPropertyNames  获取对象中的键  以数组的形式返回
+    Object.getOwnPropertyNames(person)  //["name", "age", "say"]
+    // 如果传入的值不是对象
+    Object.getOwnPropertyNames("wlc")  //传入字符串返回数组下表   ["0", "1", "2", "length"] 
+    Object.getOwnPropertyNames([1,2,3,4,5])  //传入数组返回数组下表  ["0", "1", "2", "3", "4", "length"]
+
+     //4.Object.keys()  获取对象中的键  以数组的形式返回
+    Object.keys(person)   // ["name", "age", "say"]
+
+    //4.Object.value()  获取对象中的值  以数组的形式返回
+   Object.keys(person)   // ["wlc", 18, ƒ]
+
+</script>
+</html>
