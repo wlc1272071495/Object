@@ -40,7 +40,11 @@
 
 
     console.log(a)
-    delete a.num;
+    delete a.name;
+    a.name="wwww";
+    for(var key in a){
+        console.log(key)
+    }
     console.log(a)
 
 
