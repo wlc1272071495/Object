@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -17,7 +17,7 @@
         }
         body{text-align: center}
         ul {
-            width: 500px;
+            width: 600px;
             margin: auto;
         }
 
@@ -26,6 +26,7 @@
             justify-content: space-between;
             align-items: center;
         }
+        ul>li span:not(:last-of-type){width: 100px;}
         .wrapNum{font-size: 0;}
     </style>
 </head>
@@ -33,7 +34,7 @@
 <body>
     <input type="checkbox" name="" id="" class="check_all">
     <ul class="wrap">
-        <li>
+        <!-- <li>
             <input type="checkbox" name="" class="check_one">
             <span class="goodsname">一加手机</span>
             <span class="goodsdesc">6G + 128G</span>
@@ -43,8 +44,7 @@
                     <button class="add">+</button>
             </div>
             <span class="allprice"></span>删除
-            <span></span>
-        </li>
+        </li> -->
     </ul>
 </body>
 <script>
@@ -63,58 +63,166 @@
             goodsname: "一加手机1",
             goodsdesc: "3G + 64G",
             goodsnum: 100,
-            price: 2000
+            price: 2000,
+            allprice:200000
         },
         {
             goodsname: "一加手机3",
             goodsdesc: "6G + 64G",
             goodsnum: 100,
-            price: 2499
+            price: 2499,
+            allprice:249900
         }, 
         {
-        goodsname: "一加手机5",
-        goodsdesc: "6G + 128G",
-        goodsnum: 100,
-        price: 3599
+            goodsname: "一加手机5",
+            goodsdesc: "6G + 128G",
+            goodsnum: 100,
+            price: 3599,
+            allprice:359900
          }
     ]
+    //  ` <li>
+    //         <input type="checkbox" name="" class="check_one">
+    //         <span class="goodsname">一加手机</span>
+    //         <span class="goodsdesc">6G + 128G</span>
+    //         <div class="wrapNum">
+    //                 <button class="des">-</button>
+    //                 <input class="goodsnum" type="text">
+    //                 <button class="add">+</button>
+    //         </div>
+    //         <span class="allprice"></span>删除
+    //     </li>` 
+    var ul = document.querySelector(".wrap")   
+    data.forEach(function(goods,index){
+        var {goodsname,goodsdesc,goodsnum,price,allprice} = goods;
+        var li = document.createElement("li");
+        var input = document.createElement("input");
+        input.type="checkbox"
+        input.className="check_one"
+        li.appendChild(input)
 
-    Object.defineProperties(goods, {
-        price: {
-            configurable: false,  ////能否使用delete、能否需改属性特性、或能否修改访问器属性、，false为不可重新定义，默认值为true
-            enumerable: true,    //对象属性是否可通过for-in循环，flase为不可循环，默认值为true
-            writable: false          ////对象属性是否可修改,flase为不可修改，默认值为true
-        },
-        allprice: {
-            configurable: false,
-            enumerable: true,
-            writable: true,
-            value: (goods.goodsnum * goods.price)
-        },
-        goodsnum: {
-            get(value) {
-                return goodsnum.value
-            },
-            set(value) {
-                console.log(value)
-                // goods.goodsnum = value;  
-                goodsnum.value = value;
-                goods.allprice = goods.price * value;
-                allprice.innerHTML = `总价值：${goods.allprice}`;
+        var span = document.createElement("span")
+        span.className = "goodsname";
+        span.innerHTML = goodsname;
+        li.appendChild(span)
+
+        var span = document.createElement("span")
+        span.className = "goodsdesc";
+        span.innerHTML = goodsdesc;
+        li.appendChild(span)
+        
+        var div = document.createElement("div")
+        div.className ="wrapNum";
+        var button = document.createElement("button");
+        button.innerHTML = "-";
+        button.className = "des";
+        button.onclick = function () {
+            goods.goodsnum--;
+            if (goods.goodsnum <= 0) {
+                goods.goodsnum = 0;
             }
         }
+        div.appendChild(button)
+
+        var numInput = document.createElement("input");
+        numInput.className = "goodsnum";
+        numInput.value = goodsnum;
+        numInput.oninput = function(){
+            if(!isNaN(this.value)){
+                goods.goodsnum = this.value;
+            }
+        }
+        div.appendChild(numInput)
+        
+
+        var button = document.createElement("button");
+        button.innerHTML = "+";
+        button.className = "add";
+        button.onclick = function () {
+             goods.goodsnum++;
+          }
+        div.appendChild(button)
+
+        li.appendChild(div)
+        
+        var span = document.createElement("span")
+        span.className = "allprice"
+        span.innerHTML = allprice;
+        li.appendChild(span);
+
+        var span = document.createElement("span")
+        span.className = "del"
+        span.innerHTML = "删除";
+        span.onclick = function(){
+            this.parentNode.remove()
+        }
+        li.appendChild(span);
+        
+        ul.appendChild(li)
+
+         dataBind(goods,numInput)
+      
     })
+
+    function dataBind(goods,ele){
+        Object.defineProperties(goods, {
+            price: {
+                configurable: false,  ////能否使用delete、能否需改属性特性、或能否修改访问器属性、，false为不可重新定义，默认值为true
+                enumerable: true,    //对象属性是否可通过for-in循环，flase为不可循环，默认值为true
+                writable: false          ////对象属性是否可修改,flase为不可修改，默认值为true
+            },
+            allprice: {
+                configurable:false,
+                enumerable:true,
+                writable:true,
+                value:(goods.goodsnum*goods.price)
+                // get(value) {
+                //     console.log(ele.parentNode.nextElementSibling) 
+                //     return ele.parentNode.nextElementSibling.innerHTML;
+                // },
+                // set(value) {
+                //     // goods.goodsnum = value;
+                   
+                    
+                //     // allprice.innerHTML = `总价值：${goods.allprice}`;
+                // }
+            },
+            goodsnum: {
+                get(value) {
+                    return ele.value
+                },
+                set(value) {
+                    // goods.goodsnum = value;  
+                    ele.value = value;
+                    goods.allprice = goods.price * value;
+                    // console.log(goods.allprice)
+                    ele.parentNode.nextElementSibling.innerHTML = goods.goodsnum*goods.price;
+                    // allprice.innerHTML = `总价值：${goods.allprice}`;
+                }
+            }
+         })
+         return goods;
+    }
+
     // goods.goodsnum = 100;
 
-    des.onclick = function () {
-        goods.goodsnum--;
-        if (goods.goodsnum <= 0) {
-            goods.goodsnum = 0;
-        }
+    // des.onclick = function () {
+    //     goods.goodsnum--;
+    //     if (goods.goodsnum <= 0) {
+    //         goods.goodsnum = 0;
+    //     }
+    // }
+    // add.onclick = function () {
+    //     goods.goodsnum++;
+    // }
+
+    var obj = {name:1111}
+
+    function a(obj){
+        obj.age = 18
     }
-    add.onclick = function () {
-        goods.goodsnum++;
-    }
+    a(obj)
+    console.log(obj)
 </script>
 
 </html>
