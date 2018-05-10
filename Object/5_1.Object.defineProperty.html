@@ -17,7 +17,14 @@
 
     // Object.defineProperty   给对象添加一个属性并制定该属性的配置 (注意是一个)
     // 语法  Object.defineProperty(obj,prop,descriptor)
-    // descriptor 叫做属性描述符  其形式分为
+    // descriptor 叫做属性描述符  其形式分为数据描述符以及存取描述符，两者只能选其中之一
+
+    // 数据描述符中可选键值对
+    // configurable:true,   //能否使用delete、能否需改属性特性、或能否修改访问器属性、，false为不可重新定义，默认值为true
+    // enumerable:true,     //对象属性是否可通过for-in循环，flase为不可循环，默认值为true
+    // writable:true,       //对象属性是否可修改,flase为不可修改，默认值为true
+    // value:undefined      //对象属性的默认值，默认值为undefined
+
     Object.defineProperty(a,"name",{  //此对象为数据描述符
         configurable:false,//能否使用delete、能否需改属性特性、或能否修改访问器属性、，false为不可重新定义，默认值为true
         enumerable:false,//对象属性是否可通过for-in循环，flase为不可循环，默认值为true
@@ -25,7 +32,12 @@
         value:'wlc', //对象属性的默认值，默认值为undefined
     })
 
-    Object.defineProperty(a,"num",{
+
+    // 存取描述符同时具有以下可选键值
+    // get  一个给属性提供getter方法，如果没有getter则为undefined
+    // set  一个给属性提供setter方法，如果没有setter则为undefined
+
+    Object.defineProperty(a,"num",{ // 
         set(value){
             console.log(value)
             change.value = value;

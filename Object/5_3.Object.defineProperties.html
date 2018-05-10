@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            list-style: none
+        }
+        body{text-align: center}
+        ul {
+            width: 500px;
+            margin: auto;
+        }
+
+        ul>li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .wrapNum{font-size: 0;}
+    </style>
+</head>
+
+<body>
+    <input type="checkbox" name="" id="" class="check_all">
+    <ul class="wrap">
+        <li>
+            <input type="checkbox" name="" class="check_one">
+            <span class="goodsname">一加手机</span>
+            <span class="goodsdesc">6G + 128G</span>
+            <div class="wrapNum">
+                    <button class="des">-</button>
+                    <input class="goodsnum" type="text">
+                    <button class="add">+</button>
+            </div>
+            <span class="allprice"></span>删除
+            <span></span>
+        </li>
+    </ul>
+</body>
+<script>
+
+    // Object.defineProperties   给对象添加多个属性并制定该属性的配置 (注意是一个)
+    // 语法  Object.defineProperties(obj,prop,descriptor)
+
+    var goods = {
+        goodsname: "一加手机5",
+        goodsdesc: "6G + 128G",
+        goodsnum: 100,
+        price: 3599
+    }
+    var data = [
+        {
+            goodsname: "一加手机1",
+            goodsdesc: "3G + 64G",
+            goodsnum: 100,
+            price: 2000
+        },
+        {
+            goodsname: "一加手机3",
+            goodsdesc: "6G + 64G",
+            goodsnum: 100,
+            price: 2499
+        }, 
+        {
+        goodsname: "一加手机5",
+        goodsdesc: "6G + 128G",
+        goodsnum: 100,
+        price: 3599
+         }
+    ]
+
+    Object.defineProperties(goods, {
+        price: {
+            configurable: false,  ////能否使用delete、能否需改属性特性、或能否修改访问器属性、，false为不可重新定义，默认值为true
+            enumerable: true,    //对象属性是否可通过for-in循环，flase为不可循环，默认值为true
+            writable: false          ////对象属性是否可修改,flase为不可修改，默认值为true
+        },
+        allprice: {
+            configurable: false,
+            enumerable: true,
+            writable: true,
+            value: (goods.goodsnum * goods.price)
+        },
+        goodsnum: {
+            get(value) {
+                return goodsnum.value
+            },
+            set(value) {
+                console.log(value)
+                // goods.goodsnum = value;  
+                goodsnum.value = value;
+                goods.allprice = goods.price * value;
+                allprice.innerHTML = `总价值：${goods.allprice}`;
+            }
+        }
+    })
+    // goods.goodsnum = 100;
+
+    des.onclick = function () {
+        goods.goodsnum--;
+        if (goods.goodsnum <= 0) {
+            goods.goodsnum = 0;
+        }
+    }
+    add.onclick = function () {
+        goods.goodsnum++;
+    }
+</script>
+
+</html>
